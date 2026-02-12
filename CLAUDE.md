@@ -24,6 +24,26 @@ All project documentation lives in the `docs/` directory:
 
 Before building a new feature, create a plan in `docs/plans/` using the template.
 
+### When to Read Documentation
+
+**`docs/database-standards.md`** — Read this file before:
+- Creating or modifying any database table, column, or index
+- Writing SQL queries (to use correct table/column names)
+- Writing any `db/` migration or schema file
+- Reviewing or debugging database-related code
+
+**`docs/feature-template.md`** — Read this file before:
+- Creating a new plan file (to use the correct template)
+- The user asks how plans work or how to structure one
+
+**`docs/plans/`** — Read the relevant plan file:
+- When the user says to execute, start, or continue a plan
+- When the user references a specific phase or feature by name
+- When updating progress on a feature (to log completed work)
+- When you need context on what was already built or discovered
+
+**General rule:** Only read docs when relevant to the current task. Do not read all docs at the start of every conversation.
+
 ## Project Structure
 
 ```
