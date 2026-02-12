@@ -168,7 +168,7 @@ CREATE TABLE donations (
 - Create route guards:
   - `src/routes/dashboard/+layout.server.ts` — redirect to `/auth/login` if not logged in
   - `src/routes/admin/+layout.server.ts` — redirect if not logged in or `role !== 'admin'`
-- **Status:** 🔲 Not Started
+- **Status:** ✅ Complete
 
 ### Phase 5: Public Pages & Layout
 
@@ -261,3 +261,4 @@ CREATE TABLE donations (
 - Phase 1 completed 2025-02-10 — Initialized git repo, scaffolded SvelteKit with TypeScript + Tailwind CSS v4, installed all dependencies (pg, bcrypt, stripe, adapter-node). Had to upgrade Node from v16 to v24.13.0 LTS because Vite 6 requires Node 18+. Fixed `@sveltejs/vite-plugin-svelte` version conflict (v4 needed vite 5, bumped to v5 for vite 6 support). Created SVG and PNG favicons. Installed GitHub CLI, created repo at `github.com/ShaneMcElrath/hardrockcharliefoundation`, pushed to remote. Created CLAUDE.md, docs/feature-template.md, and docs/plans/ structure. Dev server verified working on port 5173.
 - Phase 2 completed 2025-02-11 — Created multi-stage Dockerfile (node:20-bookworm-slim, Postgres 16, supervisord), docker-entrypoint.sh, supervisord.conf, db/init.sql with full schema (5 tables, 7 indexes), .dockerignore. Docker image builds successfully, container starts both Postgres and Node via supervisord, app serves on port 3000.
 - Phase 3 completed 2025-02-11 — Updated db/init.sql to match database-standards.md (singular table names, added_at/added_by_user_id, modified_at/modified_by_user_id, is_active on all tables). Note: "user" table requires quoting because it's a Postgres reserved word. Created src/lib/server/db.ts with Pool, query(), getClient(), and ping() exports. Created /api/health endpoint — verified returns `{"status":"ok","database":"connected"}` from Docker container.
+- Phase 4 completed 2025-02-11 — Created src/lib/server/auth.ts with hashPassword (bcrypt 12 rounds), verifyPassword, createSession (random 32-byte hex token, 30-day expiry), deleteSession (soft delete via is_active=FALSE), getUserFromSession (joins session+user, checks is_active and expiry). Created src/routes/+layout.server.ts to load user from session cookie on every page. Built signup (/auth/signup) with email uniqueness check, password min 8 chars, auto-login after signup. Built login (/auth/login) with email/password verification. Built logout (/auth/logout) with soft session delete + cookie clear. Created dashboard route guard (src/routes/dashboard/+layout.server.ts) — redirects to /auth/login if not authenticated. Created admin route guard (src/routes/admin/+layout.server.ts) — redirects to login if not authenticated, redirects to /dashboard if not admin role. All forms use SvelteKit enhance for progressive enhancement. svelte-check passes with 0 errors.
