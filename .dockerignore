@@ -1,0 +1,12 @@
+node_modules
+build
+.svelte-kit
+.git
+.gitignore
+.env
+.env.*
+.idea
+.claude
+*.md
+docs
+pgdata
