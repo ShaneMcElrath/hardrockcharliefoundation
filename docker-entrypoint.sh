@@ -15,8 +15,9 @@ if [ ! -s "$PGDATA/PG_VERSION" ]; then
     chown -R postgres:postgres "$PGDATA"
     su - postgres -c "/usr/lib/postgresql/16/bin/initdb -D $PGDATA --encoding=UTF8 --locale=C"
 
-    # Allow local connections with password
+    # Allow local connections with password and external connections (for dev tools)
     echo "host all all 127.0.0.1/32 md5" >> "$PGDATA/pg_hba.conf"
+    echo "host all all 0.0.0.0/0 md5" >> "$PGDATA/pg_hba.conf"
     echo "local all all trust" >> "$PGDATA/pg_hba.conf"
 fi
 
@@ -38,6 +39,15 @@ su - postgres -c "psql -tc \"SELECT 1 FROM pg_database WHERE datname='$DBNAME'\"
 # ──────────────────────────────────────────────
 echo "==> Running schema initialization..."
 su - postgres -c "psql -d $DBNAME -f /app/db/init.sql"
+
+# ──────────────────────────────────────────────
+# 4b. Grant all permissions to app user
+# ──────────────────────────────────────────────
+echo "==> Granting permissions to $DBUSER..."
+su - postgres -c "psql -d $DBNAME -c \"GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO $DBUSER;\""
+su - postgres -c "psql -d $DBNAME -c \"GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO $DBUSER;\""
+su - postgres -c "psql -d $DBNAME -c \"ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO $DBUSER;\""
+su - postgres -c "psql -d $DBNAME -c \"ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO $DBUSER;\""
 
 # ──────────────────────────────────────────────
 # 5. Stop temporary Postgres (supervisord will manage it)
