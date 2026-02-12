@@ -60,8 +60,8 @@ RUN mkdir -p /var/lib/postgresql/data \
     && touch /var/log/postgres.log /var/log/postgres_error.log /var/log/pg_setup.log \
     && chown postgres:postgres /var/log/postgres.log /var/log/postgres_error.log /var/log/pg_setup.log
 
-# Expose app port (Postgres stays internal)
-EXPOSE 3000
+# Expose app port and Postgres (for dev tooling like WebStorm)
+EXPOSE 3000 5432
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \

@@ -18,6 +18,7 @@ SvelteKit + TypeScript web application for the Hard Rock Charlie Foundation. Inf
 
 All project documentation lives in the `docs/` directory:
 
+- **`docs/database-standards.md`** — Database naming conventions, required columns, and coding rules.
 - **`docs/feature-template.md`** — How plans are created, managed, and structured. Contains the plan template.
 - **`docs/plans/`** — Individual feature plans. Each plan follows the template in `feature-template.md`.
 
@@ -28,6 +29,7 @@ Before building a new feature, create a plan in `docs/plans/` using the template
 ```
 ├── CLAUDE.md                 # This file — project overview for AI
 ├── docs/
+│   ├── database-standards.md # DB naming, required columns, rules
 │   ├── feature-template.md   # Plan template + rules
 │   └── plans/                # Individual feature plans
 ├── src/
