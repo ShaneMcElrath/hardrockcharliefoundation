@@ -134,7 +134,8 @@ CREATE TABLE donations (
 - Verify: `docker build -t hardrockcharlie .` succeeds
 - Verify: `docker run -p 3000:3000 hardrockcharlie` starts and serves the app
 - Document volume mount for persistent data: `-v pgdata:/var/lib/postgresql/data`
-- **Status:** 🔲 Not Started
+- Create `.dockerignore` to keep image clean
+- **Status:** ✅ Complete
 
 ### Phase 3: Database & Connection Pool
 
@@ -256,3 +257,4 @@ CREATE TABLE donations (
 ## Completed Work Log
 
 - Phase 1 completed 2025-02-10 — Initialized git repo, scaffolded SvelteKit with TypeScript + Tailwind CSS v4, installed all dependencies (pg, bcrypt, stripe, adapter-node). Had to upgrade Node from v16 to v24.13.0 LTS because Vite 6 requires Node 18+. Fixed `@sveltejs/vite-plugin-svelte` version conflict (v4 needed vite 5, bumped to v5 for vite 6 support). Created SVG and PNG favicons. Installed GitHub CLI, created repo at `github.com/ShaneMcElrath/hardrockcharliefoundation`, pushed to remote. Created CLAUDE.md, docs/feature-template.md, and docs/plans/ structure. Dev server verified working on port 5173.
+- Phase 2 completed 2025-02-11 — Created multi-stage Dockerfile (node:20-bookworm-slim, Postgres 16, supervisord), docker-entrypoint.sh, supervisord.conf, db/init.sql with full schema (5 tables, 7 indexes), .dockerignore. Docker image builds successfully, container starts both Postgres and Node via supervisord, app serves on port 3000.

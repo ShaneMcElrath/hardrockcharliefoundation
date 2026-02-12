@@ -21,7 +21,11 @@
       "Bash(git status:*)",
       "Bash(git push:*)",
       "Bash(docker --version:*)",
-      "Bash(docker build:*)"
+      "Bash(docker build:*)",
+      "Bash(docker run:*)",
+      "Bash(curl:*)",
+      "Bash(docker stop:*)",
+      "Bash(docker rm:*)"
     ]
   }
 }
