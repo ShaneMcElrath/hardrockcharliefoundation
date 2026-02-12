@@ -141,12 +141,14 @@ CREATE TABLE donations (
 
 > Create the database schema and server-side connection pool.
 
-- Create `db/init.sql` with full schema (users, sessions, events, event_signups, donations)
+- Create `db/init.sql` with full schema (user, session, event, event_signup, donation) — follows `docs/database-standards.md`
 - Create `src/lib/server/db.ts` — Postgres `Pool` using `DATABASE_URL` env var
-- Export a `query()` helper for parameterized SQL
+- Export `query()` helper for parameterized SQL
+- Export `getClient()` for transactions
+- Export `ping()` for health checks
 - Create `src/routes/api/health/+server.ts` — GET endpoint that pings the database
-- Verify health check returns `{"status":"ok"}` when database is connected
-- **Status:** 🔲 Not Started
+- Verify health check returns `{"status":"ok","database":"connected"}`
+- **Status:** ✅ Complete
 
 ### Phase 4: Authentication System
 
@@ -258,3 +260,4 @@ CREATE TABLE donations (
 
 - Phase 1 completed 2025-02-10 — Initialized git repo, scaffolded SvelteKit with TypeScript + Tailwind CSS v4, installed all dependencies (pg, bcrypt, stripe, adapter-node). Had to upgrade Node from v16 to v24.13.0 LTS because Vite 6 requires Node 18+. Fixed `@sveltejs/vite-plugin-svelte` version conflict (v4 needed vite 5, bumped to v5 for vite 6 support). Created SVG and PNG favicons. Installed GitHub CLI, created repo at `github.com/ShaneMcElrath/hardrockcharliefoundation`, pushed to remote. Created CLAUDE.md, docs/feature-template.md, and docs/plans/ structure. Dev server verified working on port 5173.
 - Phase 2 completed 2025-02-11 — Created multi-stage Dockerfile (node:20-bookworm-slim, Postgres 16, supervisord), docker-entrypoint.sh, supervisord.conf, db/init.sql with full schema (5 tables, 7 indexes), .dockerignore. Docker image builds successfully, container starts both Postgres and Node via supervisord, app serves on port 3000.
+- Phase 3 completed 2025-02-11 — Updated db/init.sql to match database-standards.md (singular table names, added_at/added_by_user_id, modified_at/modified_by_user_id, is_active on all tables). Note: "user" table requires quoting because it's a Postgres reserved word. Created src/lib/server/db.ts with Pool, query(), getClient(), and ping() exports. Created /api/health endpoint — verified returns `{"status":"ok","database":"connected"}` from Docker container.
