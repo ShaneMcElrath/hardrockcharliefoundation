@@ -12,7 +12,14 @@
       "Bash(winget list:*)",
       "Bash(\"/c/Program Files/nodejs/node.exe\" --version)",
       "Bash(export PATH=\"/c/Program Files/nodejs:$PATH\")",
-      "Bash(timeout 15 npx vite dev:*)"
+      "Bash(timeout 15 npx vite dev:*)",
+      "Bash(gh auth:*)",
+      "Bash(winget install:*)",
+      "Bash(export PATH=\"/c/Program Files/GitHub CLI:$PATH\")",
+      "Bash(export PATH=\"/c/Program Files/GitHub CLI:/c/Program Files/nodejs:$PATH\")",
+      "Bash(gh repo create:*)",
+      "Bash(git status:*)",
+      "Bash(git push:*)"
     ]
   }
 }
