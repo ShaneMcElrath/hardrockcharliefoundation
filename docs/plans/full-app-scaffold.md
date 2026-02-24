@@ -48,7 +48,7 @@ Build the complete Hard Rock Charlie Foundation web application from scratch. Th
 ### Schema
 
 ```sql
-CREATE TABLE users (
+clcCREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
