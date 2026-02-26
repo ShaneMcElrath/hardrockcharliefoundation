@@ -18,25 +18,32 @@ SvelteKit + TypeScript web application for the Hard Rock Charlie Foundation. Inf
 
 All project documentation lives in the `docs/` directory:
 
-- **`docs/database-standards.md`** — Database naming conventions, required columns, and coding rules.
-- **`docs/feature-template.md`** — How plans are created, managed, and structured. Contains the plan template.
-- **`docs/plans/`** — Individual feature plans. Each plan follows the template in `feature-template.md`.
+- **`docs/guides/`** — Reference guides and standards:
+  - **`database-standards.md`** — Database naming conventions, required columns, and coding rules.
+  - **`feature-template.md`** — How plans are created, managed, and structured. Contains the plan template.
+  - **`future-plans.md`** — How future plans (pre-implementation ideas) work, including DRAFT.md and DISCOVERY.md templates.
+- **`docs/plans/`** — Active feature plans. Each plan is a directory (e.g., `plans/my-feature/`) containing a `PLAN.md` and optional supporting files (screenshots, diagrams, etc.). Plans follow the template in `docs/guides/feature-template.md`.
+- **`docs/future-plans/`** — Feature ideas not yet ready for implementation. Each is a directory containing `DRAFT.md` and/or `DISCOVERY.md`. Promote to `docs/plans/` when ready.
 
-Before building a new feature, create a plan in `docs/plans/` using the template.
+Before building a new feature, create a plan directory in `docs/plans/` using the template.
 
 ### When to Read Documentation
 
-**`docs/database-standards.md`** — Read this file before:
+**`docs/guides/database-standards.md`** — Read this file before:
 - Creating or modifying any database table, column, or index
 - Writing SQL queries (to use correct table/column names)
 - Writing any `db/` migration or schema file
 - Reviewing or debugging database-related code
 
-**`docs/feature-template.md`** — Read this file before:
-- Creating a new plan file (to use the correct template)
+**`docs/guides/feature-template.md`** — Read this file before:
+- Creating a new plan directory (to use the correct template and structure)
 - The user asks how plans work or how to structure one
 
-**`docs/plans/`** — Read the relevant plan file:
+**`docs/guides/future-plans.md`** — Read this file before:
+- Creating or updating a future plan in `docs/future-plans/`
+- The user asks how future plans work or how to structure one
+
+**`docs/plans/`** — Read the relevant plan's `PLAN.md`:
 - When the user says to execute, start, or continue a plan
 - When the user references a specific phase or feature by name
 - When updating progress on a feature (to log completed work)
@@ -49,9 +56,14 @@ Before building a new feature, create a plan in `docs/plans/` using the template
 ```
 ├── CLAUDE.md                 # This file — project overview for AI
 ├── docs/
-│   ├── database-standards.md # DB naming, required columns, rules
-│   ├── feature-template.md   # Plan template + rules
-│   └── plans/                # Individual feature plans
+│   ├── guides/               # Reference guides and standards
+│   │   ├── database-standards.md   # DB naming, required columns, rules
+│   │   ├── feature-template.md     # Plan template + rules
+│   │   └── future-plans.md         # Future plan guide (DRAFT/DISCOVERY templates)
+│   ├── plans/                # Active feature plans (each is a directory)
+│   │   └── <feature-name>/   #   PLAN.md + optional assets, research, transcripts
+│   └── future-plans/         # Pre-implementation feature ideas
+│       └── <feature-name>/   #   DRAFT.md and/or DISCOVERY.md + optional assets
 ├── src/
 │   ├── app.html              # HTML shell
 │   ├── app.css               # Tailwind imports + global styles
